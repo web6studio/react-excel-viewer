@@ -12,12 +12,24 @@
 }
 
 @layer base {
+  html {
+    font-size: 16px;
+  }
+
   body {
     font-family: "Roboto", sans-serif;
     background-color: var(--color-bg);
     color: var(--color-text);
     margin: 0;
     padding: 0;
+    line-height: 1.5;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 600;
   }
 }
 
