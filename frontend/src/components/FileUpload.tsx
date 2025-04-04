@@ -25,7 +25,7 @@ export const FileUpload = ({ onFileSelected, disabled }: FileUploadProps) => {
       />
       <button
         className={`
-          px-6 py-3 rounded-md text-white
+          px-6 py-3 rounded-md text-white transition
           ${
             disabled
               ? "bg-blue-200 cursor-not-allowed"
