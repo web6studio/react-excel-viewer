@@ -13,6 +13,38 @@ services:
       MONGO_INITDB_DATABASE: excel-viewer
     volumes:
       - mongo-data:/data/db
+    networks:
+      - excel-network
+
+  backend:
+    build: ./backend
+    container_name: excel-viewer-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./backend/.env.docker
+    depends_on:
+      - mongo
+    networks:
+      - excel-network
+
+  frontend:
+    build: ./frontend
+    container_name: excel-viewer-frontend
+    restart: always
+    ports:
+      - "5173:80"
+    env_file:
+      - ./frontend/.env.docker
+    depends_on:
+      - backend
+    networks:
+      - excel-network
 
 volumes:
   mongo-data:
+
+networks:
+  excel-network:
+    driver: bridge

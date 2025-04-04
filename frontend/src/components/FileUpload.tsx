@@ -9,7 +9,7 @@ export const FileUpload = ({ onFileSelected, disabled }: FileUploadProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div className="mb-4">
+    <>
       <input
         ref={inputRef}
         type="file"
@@ -17,15 +17,18 @@ export const FileUpload = ({ onFileSelected, disabled }: FileUploadProps) => {
         className="hidden"
         onChange={(e) => {
           const file = e.target.files?.[0];
-          if (file) onFileSelected(file);
+          if (file) {
+            onFileSelected(file);
+            e.target.value = ""; // Clear the input value after selection
+          }
         }}
       />
       <button
         className={`
-          px-4 py-2 rounded-md text-white
+          px-6 py-3 rounded-md text-white transition
           ${
             disabled
-              ? "bg-blue-200"
+              ? "bg-blue-200 cursor-not-allowed"
               : "bg-blue-600 hover:bg-blue-700 cursor-pointer shadow-md"
           }
         `}
@@ -34,6 +37,6 @@ export const FileUpload = ({ onFileSelected, disabled }: FileUploadProps) => {
       >
         Upload Excel File
       </button>
-    </div>
+    </>
   );
 };
