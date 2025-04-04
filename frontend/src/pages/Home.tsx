@@ -4,6 +4,7 @@ import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 import { FileUpload } from "../components/FileUpload";
 import { useUploadFile } from "../hooks/useUploadFile";
 import { useGetFileData } from "../hooks/useGetFileData";
+import { Pagination } from "../components/Pagination";
 
 // AgGridReact styling
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -65,7 +66,7 @@ const Home = () => {
 
         {loading && (
           <div className="mt-8 relative animate-pulse">
-            <div className="h-[580px] bg-gray-100 rounded-xl border border-gray-200" />
+            <div className="h-[500px] bg-gray-100 rounded-xl border border-gray-200" />
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-10 h-10 border-4 border-gray-300 border-t-transparent rounded-full animate-spin" />
             </div>
@@ -74,7 +75,7 @@ const Home = () => {
 
         {file && !loading && (
           <div className="mt-8">
-            <div style={{ height: "580px", width: "100%" }}>
+            <div style={{ height: "500px", width: "100%" }}>
               <AgGridReact
                 rowData={file.rows}
                 columnDefs={file.columns
@@ -94,25 +95,7 @@ const Home = () => {
               />
             </div>
 
-            <div className="mt-6 flex justify-center gap-2">
-              <button
-                className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 text-sm"
-                disabled={page <= 1}
-                onClick={() => setPage((p) => Math.max(p - 1, 1))}
-              >
-                Previous
-              </button>
-              <span className="px-4 py-2 text-sm text-gray-600">
-                Page {page} of {totalPages}
-              </span>
-              <button
-                className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 text-sm"
-                disabled={page >= totalPages}
-                onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-              >
-                Next
-              </button>
-            </div>
+            <Pagination page={page} setPage={setPage} totalPages={totalPages} />
           </div>
         )}
       </div>

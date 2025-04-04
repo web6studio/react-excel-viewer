@@ -25,7 +25,7 @@ export const FileUpload = ({ onFileSelected, disabled }: FileUploadProps) => {
           px-4 py-2 rounded-md text-white
           ${
             disabled
-              ? "bg-blue-200"
+              ? "bg-blue-200 cursor-not-allowed"
               : "bg-blue-600 hover:bg-blue-700 cursor-pointer shadow-md"
           }
         `}
