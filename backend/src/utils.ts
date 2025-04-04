@@ -27,3 +27,17 @@ export const parseExcel = (buffer: Buffer): ParsedExcelData => {
 
   return { columns, rows };
 };
+
+const MAX_FILE_SIZE = 15728640; // 15Mb
+
+export const validateUploadedFile = (file: Express.Multer.File): string | null => {
+  if (file.mimetype !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+    return 'Only .xlsx files are supported';
+  }
+
+  if (file.size > MAX_FILE_SIZE) {
+    return 'File is too large. Max size is 15MB.';
+  }
+
+  return null;
+};

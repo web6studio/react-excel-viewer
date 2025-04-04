@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
 import { db } from './db';
-import { parseExcel } from './utils';
+import { parseExcel, validateUploadedFile } from './utils';
 
 // POST /files - upload and parse Excel
 export const postFile = async (req: Request, res: Response) => {
@@ -11,8 +11,18 @@ export const postFile = async (req: Request, res: Response) => {
       res.status(400).send('No file uploaded');
       return;
     }
+    const validationError = validateUploadedFile(file);
+    if (validationError) {
+      res.status(400).send(validationError);
+      return;
+    }
 
     const parsed = parseExcel(file.buffer);
+    if (!parsed.columns || !parsed.rows || parsed.rows.length === 0) {
+      res.status(400).send('Invalid or empty Excel file');
+      return;
+    }
+
     const now = new Date();
     const fileDoc = {
       originalName: file.originalname,
