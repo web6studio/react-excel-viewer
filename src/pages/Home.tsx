@@ -51,8 +51,11 @@ const Home = () => {
         )}
 
         {loading && (
-          <div className="mt-8 animate-pulse">
+          <div className="mt-8 relative animate-pulse">
             <div className="h-[580px] bg-gray-100 rounded-xl border border-gray-200" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-10 h-10 border-4 border-gray-300 border-t-transparent rounded-full animate-spin" />
+            </div>
           </div>
         )}
 

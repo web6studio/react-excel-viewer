@@ -45,3 +45,15 @@ npm run build
 ```sh
 npm run lint
 ```
+
+5. Tests
+
+```sh
+npm run test
+```
+
+5. Tests Coverage
+
+```sh
+npm run test:coverage
+```
