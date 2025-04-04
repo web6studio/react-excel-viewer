@@ -22,11 +22,11 @@ export const FileUpload = ({ onFileSelected, disabled }: FileUploadProps) => {
       />
       <button
         className={`
-          px-4 py-2 rounded text-white 
+          px-4 py-2 rounded-md text-white
           ${
             disabled
               ? "bg-blue-200"
-              : "bg-blue-600 hover:bg-blue-700 cursor-pointer"
+              : "bg-blue-600 hover:bg-blue-700 cursor-pointer shadow-md"
           }
         `}
         onClick={() => inputRef.current?.click()}
