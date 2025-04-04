@@ -10,8 +10,14 @@ type FileItemProps = {
 export const FileItem = ({ file, isSelected, onClick }: FileItemProps) => {
   const { mutate: deleteFile, isPending } = useDeleteFile();
 
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    deleteFile(file.id);
+  };
+
   return (
     <div
+      onClick={onClick}
       className={`group flex items-center justify-between px-5 py-4 mb-2 rounded-lg overflow-hidden border cursor-pointer shadow-xs transition
         ${
           isSelected
@@ -20,10 +26,7 @@ export const FileItem = ({ file, isSelected, onClick }: FileItemProps) => {
         }
       `}
     >
-      <div
-        onClick={onClick}
-        className="flex flex-col sm:flex-row sm:items-center sm:justify-between flex-1 pr-4 gap-1 text-left"
-      >
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between flex-1 pr-4 gap-1 text-left">
         <p className="text-sm sm:text-base font-medium text-gray-800 truncate">
           {file.originalName}
         </p>
@@ -33,7 +36,7 @@ export const FileItem = ({ file, isSelected, onClick }: FileItemProps) => {
       </div>
 
       <button
-        onClick={() => deleteFile(file.id)}
+        onClick={handleDelete}
         disabled={isPending}
         className="text-gray-700 hover:text-red-500 disabled:text-gray-400 p-2 transition-colors cursor-pointer"
         title="Delete"
