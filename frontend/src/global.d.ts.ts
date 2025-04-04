@@ -8,7 +8,7 @@ declare global {
   }
 
   type ColumnDef = { key: string; label: string };
-  type ExcelRowData = Record<string, string | number | boolean | null>;
+  type RowData = Record<string, string | number | boolean | null>;
 }
 
 export {};

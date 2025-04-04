@@ -118,7 +118,9 @@ export const getFiles = async (_req: Request, res: Response) => {
       .sort({ createdAt: -1 })
       .toArray();
 
-    res.json(files);
+    const mappedFiles = files.map(({ _id, ...rest }) => ({ id: _id.toString(), ...rest }));
+
+    res.json(mappedFiles);
   } catch (error) {
     console.error('Error fetching files:', error);
     res.status(500).send('Failed to fetch files');

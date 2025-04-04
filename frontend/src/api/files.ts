@@ -26,3 +26,17 @@ export const fetchFileData = async (
   if (!res.ok) throw new Error("Failed to fetch file data");
   return res.json();
 };
+
+export const fetchFileList = async (): Promise<FileResponse[]> => {
+  const res = await fetch(`${API_BASE_URL}/files`);
+  if (!res.ok) throw new Error("Failed to fetch files");
+  return res.json();
+};
+
+export const deleteFileById = async (id: string): Promise<void> => {
+  const res = await fetch(`${API_BASE_URL}/files/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) throw new Error("Failed to delete file");
+};

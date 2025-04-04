@@ -32,3 +32,9 @@
     font-weight: 600;
   }
 }
+
+@media (max-width: 768px) {
+  .grid-height-mobile {
+    height: calc(100vh - 200px) !important;
+  }
+}

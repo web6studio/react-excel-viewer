@@ -1,104 +1,69 @@
 import { useState } from "react";
-import { AgGridReact } from "ag-grid-react";
-import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 import { FileUpload } from "../components/FileUpload";
+import { FileList } from "../components/FileList";
+import { Modal } from "../components/Modal";
+import { FileGridPreview } from "../components/FileGridPreview";
 import { useUploadFile } from "../hooks/useUploadFile";
 import { useGetFileData } from "../hooks/useGetFileData";
-import { Pagination } from "../components/Pagination";
-
-// AgGridReact styling
-ModuleRegistry.registerModules([AllCommunityModule]);
 
 const PAGE_SIZE = 100;
 
 const Home = () => {
-  const [fileId, setFileId] = useState<string | null>(null);
+  const [selectedFileId, setSelectedFileId] = useState<string | null>(null);
   const [page, setPage] = useState(1);
 
-  const {
-    mutate: uploadFile,
-    isPending: isUploading,
-    error: uploadError,
-  } = useUploadFile();
-
-  const {
-    data: file,
-    isLoading: isFetching,
-    error: fetchError,
-  } = useGetFileData(fileId, page, PAGE_SIZE);
+  const { mutate: uploadFile, isPending: isUploading } = useUploadFile();
+  const { data: file } = useGetFileData(selectedFileId, page, PAGE_SIZE);
 
   const handleFileUpload = (file: File) => {
     uploadFile(file, {
       onSuccess: ({ id }) => {
-        setFileId(id);
+        setSelectedFileId(id);
         setPage(1);
       },
     });
   };
 
-  const error = uploadError || fetchError;
-  const loading = isUploading || isFetching;
-  const totalPages = file ? Math.ceil(file.total / PAGE_SIZE) : 0;
-
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center md:p-4">
-      <div
-        className={`w-full ${
-          file ? "max-w-6xl" : "max-w-xl"
-        } bg-white shadow-xl md:rounded-2xl p-8 transition-all duration-300 text-center`}
-      >
-        <header className="mb-7">
-          <h1 className="text-4xl font-bold text-gray-800 uppercase mt-4">
-            Excel Viewer
-          </h1>
-          <p className="text-gray-600 mt-6">
-            Upload an excel file to explore its contents
+    <div className="min-h-screen flex flex-col items-center justify-center p-8 text-center">
+      {isUploading && (
+        <div className="fixed inset-0 z-50 bg-white flex flex-col items-center justify-center gap-6">
+          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+          <p className="mt-2 pl-3 text-gray-500 text-3xl tracking-wide font-semibold animate-pulse">
+            Loading...
           </p>
-        </header>
+        </div>
+      )}
 
-        <FileUpload onFileSelected={handleFileUpload} disabled={loading} />
+      <header className="mb-8">
+        <h1 className="text-4xl font-bold text-gray-800 uppercase">
+          Excel Viewer
+        </h1>
+        <p className="text-gray-600 mt-6 text-lg">
+          Upload an Excel file to explore its contents
+        </p>
+      </header>
 
-        {error && (
-          <div className="mt-6 text-red-600 bg-red-50 border border-red-200 rounded-lg p-4 text-sm shadow-sm">
-            {(error as Error).message || "Something went wrong"}
-          </div>
-        )}
+      <FileUpload onFileSelected={handleFileUpload} />
 
-        {loading && (
-          <div className="mt-8 relative animate-pulse">
-            <div className="h-[500px] bg-gray-100 rounded-xl border border-gray-200" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-10 h-10 border-4 border-gray-300 border-t-transparent rounded-full animate-spin" />
-            </div>
-          </div>
-        )}
-
-        {file && !loading && (
-          <div className="mt-8">
-            <div style={{ height: "500px", width: "100%" }}>
-              <AgGridReact
-                rowData={file.rows}
-                columnDefs={file.columns
-                  .filter((col: ColumnDef) => col.key !== "_id")
-                  .map((col: ColumnDef) => ({
-                    field: col.key,
-                    headerName: col.label,
-                    sortable: true,
-                    filter: true,
-                    resizable: true,
-                  }))}
-                defaultColDef={{
-                  flex: 1,
-                  minWidth: 120,
-                  editable: true,
-                }}
-              />
-            </div>
-
-            <Pagination page={page} setPage={setPage} totalPages={totalPages} />
-          </div>
-        )}
+      <div className="mt-15 w-full max-w-2xl">
+        <FileList
+          selectedId={selectedFileId}
+          onSelect={(id: string) => {
+            setSelectedFileId(id);
+            setPage(1);
+          }}
+        />
       </div>
+
+      {selectedFileId && file && (
+        <Modal
+          onClose={() => setSelectedFileId(null)}
+          title={file.originalName}
+        >
+          <FileGridPreview file={file} page={page} setPage={setPage} />
+        </Modal>
+      )}
     </div>
   );
 };

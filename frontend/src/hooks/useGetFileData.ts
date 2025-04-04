@@ -7,7 +7,7 @@ export const useGetFileData = (
   pageSize: number
 ) =>
   useQuery({
-    queryKey: ["fileData", fileId, page],
+    queryKey: ["file", fileId, page],
     queryFn: () => fetchFileData(fileId!, page, pageSize),
     enabled: !!fileId,
     placeholderData: (previousData) => previousData,
