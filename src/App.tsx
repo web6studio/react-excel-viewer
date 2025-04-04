@@ -27,11 +27,11 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-4 text-center">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center md:p-4 text-center">
       <div
         className={`w-full ${
           data ? "max-w-6xl" : "max-w-xl"
-        } bg-white shadow-xl rounded-2xl p-8 transition-all duration-300`}
+        } bg-white shadow-xl  md:rounded-2xl p-8 transition-all duration-300`}
       >
         <header className="mb-7">
           <h1 className="text-4xl font-bold text-gray-800 uppercase mt-4">
