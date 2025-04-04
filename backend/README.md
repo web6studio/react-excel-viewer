@@ -2,6 +2,17 @@
 
 A Backend application for visualizing excel documents.
 
+## Tech Stack
+
+- Node.js
+- Express.js – lightweight HTTP server
+- MongoDB – document database
+- Multer – file upload middleware
+- xlsx – Excel file parser
+- TypeScript – static typing for reliability
+- dotenv – environment variable management
+- jest – tests
+
 ## Installation and Setup
 
 1. Install dependencies:
