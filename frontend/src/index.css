@@ -32,14 +32,3 @@
     font-weight: 600;
   }
 }
-
-.hide-arrows::-webkit-inner-spin-button,
-.hide-arrows::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.hide-arrows {
-  -moz-appearance: textfield;
-  appearance: textfield;
-}
