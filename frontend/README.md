@@ -2,9 +2,7 @@
 
 A frontend application for visualizing excel documents.
 
-## Design Choices & Tech Stack
-
-### Frameworks & Libraries
+## Frameworks & Libraries
 
 - React + TypeScript: Provides a strongly typed, component-based structure that is scalable and ideal for maintainability.
 
