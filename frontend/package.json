@@ -1,5 +1,5 @@
 {
-  "name": "excel-viewer",
+  "name": "excel-viewer-frontend",
   "private": true,
   "version": "0.1.0",
   "type": "module",
