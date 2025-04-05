@@ -28,7 +28,7 @@ const Home = () => {
     <div className="min-h-screen flex flex-col items-center justify-center p-8 text-center">
       {isUploading && (
         <div className="fixed inset-0 z-50 bg-white flex flex-col items-center justify-center gap-6">
-          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-12 h-12 border-4 border-green-500 border-t-transparent rounded-full animate-spin" />
           <p className="mt-2 pl-3 text-gray-500 text-3xl tracking-wide font-semibold animate-pulse">
             Loading...
           </p>

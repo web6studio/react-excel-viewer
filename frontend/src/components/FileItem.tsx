@@ -21,7 +21,7 @@ export const FileItem = ({ file, isSelected, onClick }: FileItemProps) => {
       className={`group flex items-center justify-between px-5 py-4 mb-2 rounded-lg overflow-hidden border cursor-pointer shadow-xs transition
         ${
           isSelected
-            ? "bg-blue-50 border-blue-500"
+            ? "bg-green-50 border-green-500"
             : "bg-white border-gray-300 hover:bg-gray-50"
         }
       `}
