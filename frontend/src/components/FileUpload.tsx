@@ -28,8 +28,8 @@ export const FileUpload = ({ onFileSelected, disabled }: FileUploadProps) => {
           px-6 py-3 rounded-md text-white transition
           ${
             disabled
-              ? "bg-blue-200 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700 cursor-pointer shadow-md"
+              ? "bg-green-200 cursor-not-allowed"
+              : "bg-green-600 hover:bg-green-700 cursor-pointer shadow-md"
           }
         `}
         onClick={() => inputRef.current?.click()}
