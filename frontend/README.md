@@ -4,19 +4,17 @@ A frontend application for visualizing excel documents.
 
 ## Frameworks & Libraries
 
-- React + TypeScript: Provides a strongly typed, component-based structure that is scalable and ideal for maintainability.
+- React + TypeScript: Strongly typed, component-based structure.
 
-- Vite: Ultra-fast build tool with native TypeScript support and hot module replacement (HMR) — perfect for modern frontends.
+- Vite: Build tool with native TypeScript support and hot module replacement (HMR).
 
-- Tailwind CSS: Utility-first CSS framework that enables consistent, responsive design with minimal custom CSS.
+- Tailwind CSS: Responsive design with minimal custom CSS.
 
 - AG Grid (Community Edition): High-performance data grid with built-in support for sorting, filtering, pagination, and editing — handles large datasets efficiently.
 
-- xlsx (SheetJS): Robust browser-side Excel parser. Used to convert uploaded .xlsx files into a usable JSON format.
+- ESLint + Prettier: Ensures consistent code formatting and code quality.
 
-- ESLint + Prettier: Ensures consistent code formatting and code quality across the project.
-
-- Jest: Unit testing framework of choice for testing utility functions and ensuring correctness.
+- Jest: Unit testing framework (tests aren't implemented yet).
 
 ## Installation and Setup
 
